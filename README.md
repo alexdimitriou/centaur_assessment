@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Getting Started with centaur_assessment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built using node@16.13 and npm 8.1.2 (yarn 1.22.19)
 
-## Available Scripts
+In the project directory run npm install or yarn
+
+## Information about libraries used
+
+centaur_assessment is written using plain javascript (as is the rest of the Centaur stack) in React.js.
+
+In order for the silo to be as interactive as possible an html5 canvas library is used (konvajs) to handle both rendering of the elements and interaction.
+
+The libary used for the UI is MaterialUI.
+
+For the graphs Graph.js is used.
+
+json-server is being used as the development server.
+
+## Start the project and the development server
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm start` or `yarn start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+It also starts the development server (json-server) at localhost:3001
 
-### `npm test`
+## What can you do in the application
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Create user account
 
-### `npm run build`
+You can navigate to localhost:3000 or localhost:3000/register to create a new user account
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Login with an existin account
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Navigate to localhost:3000/login to login to the application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Create a new sensor
 
-### `npm run eject`
+You can right click anywhere on the silo to create a new sensor. The sensor will be given a unique id (by the backend).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Add temperatures and timestamps to the sensor
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+When you left click on a sensor a modal comes up that shows:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. The id of the sensor
+2. The position of the sensor on the silo canvas
+3. The temperature/timestamps of that sensor in a table view
+4. A form where you can input a new temperature for a specific time stamp
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+When you press the submit button all sensor information is updated on the server.
 
-## Learn More
+### Data graphs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+On the right of the silo a temperature/timestamp line graph is generated for each sensor, divided in tabs.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can press on any tab to view the graph for that specific sensor.
 
-### Code Splitting
+### Delete sensors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+You can right click on a sensor in order to show the delete option.
 
-### Analyzing the Bundle Size
+### Change sensor location
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can left click and drag to move the sensor freely (in the bounds of the silo of course). The location of the sensor is updated and saved on the server.
 
-### Making a Progressive Web App
+### Logout
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+You can logout using the user menu on the top right of the application.
 
-### Advanced Configuration
+## Known issues
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Dismiss right click
 
-### Deployment
+In order to dismiss the right click menu you need to press anywhere within the silo. It should be anywhere within the app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Improvements
 
-### `npm run build` fails to minify
+### Position information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Position information corresponds to the location on the html5 canvas which is great for visualization purposes but useless for the end user. A way to input silo dimensions would allow them to be translated to the real silo position thus makin the position information more useful.
+
+### Better organization of some of the code
+
+For example all fetches should not be written in the components themselves but in a different file.
+
+### Write tests :P
